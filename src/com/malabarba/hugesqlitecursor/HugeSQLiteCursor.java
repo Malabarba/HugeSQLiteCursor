@@ -40,12 +40,6 @@ public class HugeSQLiteCursor implements Cursor {
     private Cursor mCursor;
     private ArrayList<Cursor> mCursors = new ArrayList<Cursor> ();
     private SQLiteDatabase db;
-//    private boolean  = false;
-    
-    // public HugeSQLiteCursor(SQLiteDatabase db, String table, String[] columns, String where, String[] searchText, String step, int size) {
-    //     this(db, table, columns, where, searchText, step) ;
-    //     mCount = size;
-    // }
     
     /**
      * Creates an instance of HugeSQLiteCursor which is populated as
@@ -163,8 +157,7 @@ public class HugeSQLiteCursor implements Cursor {
         final int count = mCursor.getInt(mCursor.getColumnIndex(COUNT_COLUMN_NAME));
         mCursor.moveToPosition(old);
         return count;
-    }
-    
+    }    
     
     public int getPartialCount() {
         if (partialCount < 0) {
@@ -191,11 +184,10 @@ public class HugeSQLiteCursor implements Cursor {
     /* (non-Javadoc)
      * @see android.database.Cursor#moveToPosition(int)
      */
-@Override
+    @Override
     public boolean moveToPosition(int arg0) {
         loadUpTo(arg0+mStep);
-        if (Log.isLoggable(TAG, Log.VERBOSE)) Log.v(TAG,"Moving to "+arg0);
-        
+        if (Log.isLoggable(TAG, Log.VERBOSE)) Log.v(TAG,"Moving to "+arg0);        
         return mCursor.moveToPosition(arg0);
     }
 
@@ -263,8 +255,7 @@ public class HugeSQLiteCursor implements Cursor {
         return (getCount() == 0) || (getPosition() == getCount());
     }
 
-    // Methods that don't change
-        
+    // Methods that don't change    
     /* (non-Javadoc)
      * @see android.database.Cursor#close()
      */
@@ -368,48 +359,24 @@ public class HugeSQLiteCursor implements Cursor {
      */
     @Override
     public boolean isBeforeFirst() {return mCursor.isBeforeFirst();}
-
     /* (non-Javadoc)
      * @see android.database.Cursor#isClosed()
      */
     @Override
     public boolean isClosed() {return mCursor.isClosed();}
-
     /* (non-Javadoc)
      * @see android.database.Cursor#isFirst()
      */
     @Override
     public boolean isFirst() {return mCursor.isFirst();}
-
     /* (non-Javadoc)
      * @see android.database.Cursor#isNull(int)
      */
     @Override
     public boolean isNull(int columnIndex) {return mCursor.isNull(columnIndex);}
-
-    // /* (non-Javadoc)
-    //  * @see android.database.Cursor#move()
-    //  */
-    // @Override
-    // public final boolean move(int offset) {return moveToPosition(getPosition() + offset);}
-    // /* (non-Javadoc)
-    //  * @see android.database.Cursor#moveToFirst()
-    //  */
-    // @Override
-    // public final boolean moveToFirst() {return moveToPosition(0);}
-    // /* (non-Javadoc)
-    //  * @see android.database.Cursor#moveToLast()
-    //  */
-    // @Override
-    // public final boolean moveToLast() {return moveToPosition(getCount() - 1);}
-    // /* (non-Javadoc)
-    //  * @see android.database.Cursor#moveToNext()
-    //  */
-    // @Override
-    // public final boolean moveToNext() {return moveToPosition(getPosition() + 1);}
-    // /* (non-Javadoc)
-    //  * @see android.database.Cursor#moveToPrevious()
-    //  */
+    /* (non-Javadoc)
+     * @see android.database.Cursor#moveToPrevious()
+     */
     @Override
     public final boolean moveToPrevious() {return moveToPosition(getPosition() - 1);}
     /* (non-Javadoc)
@@ -417,7 +384,6 @@ public class HugeSQLiteCursor implements Cursor {
      */
     @Override
     public boolean move(int offset) {return moveToPosition(getPosition() + offset);}
-
     /* (non-Javadoc)
      * @see android.database.Cursor#moveToFirst()
      */
@@ -426,7 +392,6 @@ public class HugeSQLiteCursor implements Cursor {
         // TODO Auto-generated method stub
         return false;
     }
-
     /* (non-Javadoc)
      * @see android.database.Cursor#moveToLast()
      */
@@ -435,7 +400,6 @@ public class HugeSQLiteCursor implements Cursor {
         // TODO Auto-generated method stub
         return false;
     }
-
     /* (non-Javadoc)
      * @see android.database.Cursor#moveToNext()
      */
@@ -444,48 +408,40 @@ public class HugeSQLiteCursor implements Cursor {
         // TODO Auto-generated method stub
         return false;
     }
-
     /* (non-Javadoc)
      * @see android.database.Cursor#registerContentObserver(android.database.ContentObserver)
      */
-        @Override
+    @Override
     public void registerContentObserver(ContentObserver arg0) {mCursor.registerContentObserver(arg0);}
-
     /* (non-Javadoc)
      * @see android.database.Cursor#registerDataSetObserver(android.database.DataSetObserver)
      */
-        @Override
+    @Override
     public void registerDataSetObserver(DataSetObserver arg0) {mCursor.registerDataSetObserver(arg0);}
-
     /* (non-Javadoc)
      * @see android.database.Cursor#requery()
      */
     @Override
     @Deprecated
     public boolean requery() {return mCursor.requery();}
-
     /* (non-Javadoc)
      * @see android.database.Cursor#respond(android.os.Bundle)
      */
     @Override
     public Bundle respond(Bundle arg0) {return mCursor.respond(arg0);}
-
     /* (non-Javadoc)
      * @see android.database.Cursor#setNotificationUri(android.content.ContentResolver, android.net.Uri)
      */
     @Override
     public void setNotificationUri(ContentResolver arg0, Uri arg1) {mCursor.setNotificationUri(arg0, arg1);}
-
     /* (non-Javadoc)
      * @see android.database.Cursor#unregisterContentObserver(android.database.ContentObserver)
      */
     @Override
     public void unregisterContentObserver(ContentObserver arg0) {mCursor.unregisterContentObserver(arg0);}
-
     /* (non-Javadoc)
      * @see android.database.Cursor#unregisterDataSetObserver(android.database.DataSetObserver)
      */
     @Override
     public void unregisterDataSetObserver(DataSetObserver arg0) {mCursor.unregisterDataSetObserver(arg0);}
-
 }
