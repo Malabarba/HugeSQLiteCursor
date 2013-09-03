@@ -1,4 +1,24 @@
 /**
+ * The MIT License (MIT)
+ * 
+ * Copyright (c) 2013 Artur Malabarba
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  */
 package com.malabarba.hugesqlitecursor;
@@ -21,7 +41,14 @@ import android.text.TextUtils;
 import android.util.Log;
 
 /**
- * @author artur
+ * A Cursor for SQLite queries, provided as a replacement for
+ * SQLiteCursor, which loads the result rows on-demand. This makes it
+ * several orders of magnitude more efficient (in time AND space) when
+ * query results are Huge.
+ * 
+ * See the constructor doc below for more information.
+ * 
+ * @author Artur Malabarba
  *
  */
 public class HugeSQLiteCursor implements Cursor {
@@ -45,11 +72,12 @@ public class HugeSQLiteCursor implements Cursor {
      * Creates an instance of HugeSQLiteCursor which is populated as
      * necessary with the query results. This means that queries with
      * huge results won't take long to load, in fact they'll take
-     * almost exactly as long as a quqery with {@link step} results.
+     * almost exactly as long as a query with "{@link step}" results.
      * 
      * The cursor created should behave identically to the one you'd
      * get by running db.query(table, columns, selection,
-     * selectionArgs, null, null, "_id", null).
+     * selectionArgs, null, null, "_id", null), except for performance 
+     * of course.
      *
      * In other words, this constructor is almost identical to a
      * query(...) command, except results will be sorted by the "_id"
@@ -159,6 +187,11 @@ public class HugeSQLiteCursor implements Cursor {
         return count;
     }    
     
+    /**
+     * How many rows have been loaded so far?
+     * @return Number of rows loaded so far.
+     * @see loadUpTo
+     */
     public int getPartialCount() {
         if (partialCount < 0) {
             if (mIdColumn < 0)
